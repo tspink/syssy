@@ -10,7 +10,7 @@
  * Creates a new system descriptor.
  * @return A pointer to a system descriptor.
  */
-system_t *system_create(memctl_t *memctl, devctl_t *devctl)
+system_t *system_create(const memctl_t *memctl, const devctl_t *devctl)
 {
     system_t *system;
     

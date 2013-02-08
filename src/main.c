@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     system_t *sys;
     int rc;
     
-    sys = system_create();
+    sys = system_create(&default_mcu, NULL);
     if (!sys) {
         printf("error: unable to create system descriptor\n");
         return -1;

@@ -1,1 +1,1 @@
-obj-y := system.o alloc.o
+obj-y := system.o alloc.o memory-controller.o

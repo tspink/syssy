@@ -9,23 +9,34 @@
 
 #include <stddef.h>
 
+typedef unsigned long sys_addr;
+typedef unsigned long long sys_data;
+
+typedef int (*memio_callback_t)(int operation, sys_addr addr, sys_data *data);
+
 struct _system;
 typedef struct {
     int (*init)(struct _system *system);
-    int (*write)(unsigned long addr, unsigned long long data, unsigned int size);
-    int (*read)(unsigned long addr, unsigned long long *data, unsigned int size);
+    int (*write)(struct _system *system, sys_addr addr, sys_data data, unsigned int size);
+    int (*read)(struct _system *system, sys_addr addr, sys_data *data, unsigned int size);
+    int (*install_handler)(struct _system *system, sys_addr base, sys_addr size, memio_callback_t callback);
 } memctl_t;
+
+extern const memctl_t default_mcu;
 
 typedef struct {
     int (*init)(struct _system *system);
 } devctl_t;
 
 typedef struct _system {
-    memctl_t *memctl;
-    devctl_t *devctl;
+    const memctl_t *memctl;
+    void *memctl_priv;
+    
+    const devctl_t *devctl;
+    void *devctl_priv;
 } system_t;
 
-extern system_t *system_create(memctl_t *memctl, devctl_t *devctl);
+extern system_t *system_create(const memctl_t *memctl, const devctl_t *devctl);
 extern void system_destroy(system_t *sys);
 extern int system_run_simulation(system_t *sys);
 
