@@ -14,6 +14,9 @@ system_t *system_create(const memctl_t *memctl, const devctl_t *devctl)
 {
     system_t *system;
     
+    if (!memctl || !devctl)
+        return NULL;
+    
     system = syssy_alloc(sizeof(*system), NONE);
     if (!system)
         return NULL;

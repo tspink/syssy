@@ -26,7 +26,10 @@ int main(int argc, char** argv)
     }
     
     rc = system_run_simulation(sys);
-    system_destroy(sys);
+    if (rc) {
+        printf("error: error whilst running simulation\n");
+    }
     
+    system_destroy(sys);
     return rc;
 }
