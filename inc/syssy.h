@@ -15,6 +15,7 @@ typedef struct {
 
 extern system_t *system_create(void);
 extern void system_destroy(system_t *sys);
+extern int system_run_simulation(system_t *sys);
 
 typedef enum {
     NONE,

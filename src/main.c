@@ -17,6 +17,7 @@
 int main(int argc, char** argv)
 {
     system_t *sys;
+    int rc;
     
     sys = system_create();
     if (!sys) {
@@ -24,6 +25,8 @@ int main(int argc, char** argv)
         return -1;
     }
     
+    rc = system_run_simulation(sys);
     system_destroy(sys);
-    return 0;
+    
+    return rc;
 }

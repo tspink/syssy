@@ -12,7 +12,13 @@
  */
 system_t *system_create()
 {
-    return NULL;
+    system_t *system;
+    
+    system = syssy_alloc(sizeof(*system), NONE);
+    if (!system)
+        return NULL;
+    
+    return system;
 }
 
 /**
@@ -22,4 +28,14 @@ system_t *system_create()
 void system_destroy(system_t *sys)
 {
     syssy_free(sys);
+}
+
+/**
+ * Runs the simulation.
+ * @param sys A pointer to a system descriptor.
+ */
+int system_run_simulation(system_t *sys)
+{
+    /* TODO: Implement this function. */
+    return -1;
 }
