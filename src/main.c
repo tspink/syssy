@@ -19,7 +19,10 @@ int main(int argc, char** argv)
     system_t *sys;
     int rc;
     
-    sys = system_create(&default_mcu, NULL);
+    printf("SYSSY - The System Simulator\n");
+    printf("Copyright (C) University of Edinburgh 2013\n\n");
+    
+    sys = system_create(&default_mcu, &default_dcu);
     if (!sys) {
         printf("error: unable to create system descriptor\n");
         return -1;

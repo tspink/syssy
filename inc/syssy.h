@@ -7,6 +7,18 @@
 #ifndef SYSSY_H
 #define	SYSSY_H
 
+#include <stdio.h>
+
+#ifdef DEBUG
+# define dbg(a...) fprintf(stderr, "debug: " a)
+#else
+# define dbg(a...)
+#endif
+
+#define info(a...) fprintf(stderr, "info: " a)
+#define warn(a...) fprintf(stderr, "warning: " a)
+#define err(a...) fprintf(stderr, "error: " a)
+
 #include <stddef.h>
 
 typedef unsigned long sys_addr;
@@ -27,6 +39,8 @@ extern const memctl_t default_mcu;
 typedef struct {
     int (*init)(struct _system *system);
 } devctl_t;
+
+extern const devctl_t default_dcu;
 
 typedef struct _system {
     const memctl_t *memctl;

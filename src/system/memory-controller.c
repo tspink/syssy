@@ -21,12 +21,15 @@ static int mcu_init(system_t *sys)
 {
     struct mcu *mcu;
     mcu = syssy_alloc(sizeof(struct mcu), NONE);
-    if (!mcu)
+    if (!mcu) {
+        err("unable to allocate memory for mcu private structure\n");
         return -1;
+    }
     
     mcu->size = 0xFFFFFFFF;
     mcu->vmem = mmap(NULL, mcu->size, PROT_READ | PROT_WRITE, MAP_PRIVATE, -1, 0);
     if (!mcu->vmem) {
+        err("unable to map memory for virtual memory pool\n");
         syssy_free(mcu);
         return -1;
     }
@@ -38,18 +41,21 @@ static int mcu_init(system_t *sys)
 static int mcu_write(system_t *sys, sys_addr addr, sys_data data, unsigned int size)
 {
     struct mcu *mcu = get_mcu(sys);
+    err("mcu_write: not implemented");
     return -1;
 }
 
 static int mcu_read(system_t *sys, sys_addr addr, sys_data *data, unsigned int size)
 {
     struct mcu *mcu = get_mcu(sys);
+    err("mcu_read: not implemented");
     return -1;
 }
 
 static int mcu_install_handler(system_t *sys, sys_addr base, sys_addr length, memio_callback_t callback)
 {
     struct mcu *mcu = get_mcu(sys);
+    err("mcu_install_handler: not implemented");
     return -1;
 }
 

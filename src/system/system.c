@@ -14,12 +14,16 @@ system_t *system_create(const memctl_t *memctl, const devctl_t *devctl)
 {
     system_t *system;
     
-    if (!memctl || !devctl)
+    if (!memctl || !devctl) {
+        err("invalid arguments passed to system_create\n");
         return NULL;
+    }
     
     system = syssy_alloc(sizeof(*system), NONE);
-    if (!system)
+    if (!system) {
+        err("unable to allocate memory for system descriptor\n");
         return NULL;
+    }
     
     system->memctl = memctl;
     system->devctl = devctl;
@@ -42,10 +46,18 @@ void system_destroy(system_t *sys)
  */
 int system_run_simulation(system_t *sys)
 {
+    int rc;
+    
     /* Run subsystem initialisation routines.  This order is well-defined. */
-    sys->memctl->init(sys);
-    sys->devctl->init(sys);
+    rc = sys->memctl->init(sys);
+    if (rc)
+        return rc;
+    
+    rc = sys->devctl->init(sys);
+    if (rc)
+        return rc;
     
     /* TODO: Implement the rest of this function. */
-    return -1;
+    info("todo: implement system_run_simulation\n");
+    return rc;
 }
