@@ -28,7 +28,7 @@ export TOPDIR	:= $(CURDIR)
 export DISTDIR	:= $(TOPDIR)/dist
 export BLDDIR	:= $(TOPDIR)/build
 export SRCDIR	:= $(TOPDIR)/src
-export INCDIR	:= $(TOPDIR)/include
+export INCDIR	:= $(TOPDIR)/inc
 
 # Tools
 -include $(BLDDIR)/Makefile.tools

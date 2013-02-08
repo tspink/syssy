@@ -1,1 +1,2 @@
-obj-y := main.o
+obj-y	    := main.o
+subdirs-y   := system/
