@@ -15,7 +15,13 @@
  */
 void *syssy_alloc(unsigned int size, syssy_alloc_flags_t flags)
 {
-    return malloc(size);
+    /* Check to see if the ZEROMEM flag was set.  If it was, use 'calloc' to
+     * perform the allocation, as 'calloc' (by definition) guarantees that
+     * the memory allocated is set to zero. */
+    if (flags & ZEROMEM)
+        return calloc(1, size);
+    else
+        return malloc(size);
 }
 
 /**

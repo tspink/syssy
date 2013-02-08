@@ -19,6 +19,7 @@ extern int system_run_simulation(system_t *sys);
 
 typedef enum {
     NONE,
+    ZEROMEM,
 } syssy_alloc_flags_t;
 
 extern void *syssy_alloc(unsigned int size, syssy_alloc_flags_t flags);
