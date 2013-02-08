@@ -10,13 +10,16 @@
  * Creates a new system descriptor.
  * @return A pointer to a system descriptor.
  */
-system_t *system_create()
+system_t *system_create(memctl_t *memctl, devctl_t *devctl)
 {
     system_t *system;
     
     system = syssy_alloc(sizeof(*system), NONE);
     if (!system)
         return NULL;
+    
+    system->memctl = memctl;
+    system->devctl = devctl;
     
     return system;
 }
@@ -36,6 +39,10 @@ void system_destroy(system_t *sys)
  */
 int system_run_simulation(system_t *sys)
 {
-    /* TODO: Implement this function. */
+    /* Run subsystem initialisation routines.  This order is well-defined. */
+    sys->memctl->init(sys);
+    sys->devctl->init(sys);
+    
+    /* TODO: Implement the rest of this function. */
     return -1;
 }

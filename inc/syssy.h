@@ -9,11 +9,23 @@
 
 #include <stddef.h>
 
+struct _system;
 typedef struct {
-    int tag;
+    int (*init)(struct _system *system);
+    int (*write)(unsigned long addr, unsigned long long data, unsigned int size);
+    int (*read)(unsigned long addr, unsigned long long *data, unsigned int size);
+} memctl_t;
+
+typedef struct {
+    int (*init)(struct _system *system);
+} devctl_t;
+
+typedef struct _system {
+    memctl_t *memctl;
+    devctl_t *devctl;
 } system_t;
 
-extern system_t *system_create(void);
+extern system_t *system_create(memctl_t *memctl, devctl_t *devctl);
 extern void system_destroy(system_t *sys);
 extern int system_run_simulation(system_t *sys);
 
